@@ -53,6 +53,34 @@ app.use((req, res, next) => {
         })
     })
 
+    app.post("/api/search",(req,res)=>{
+        var getTitle=req.body
+        receipeModel.find(getTitle,(error,data)=>{
+            if(error)
+            {
+                res.send({"status":"error"})
+            }
+            else
+            {
+                res.send(data)
+            }
+        })
+    })
+
+app.post("/api/delete",(req,res)=>{
+    var getId=req.body
+    receipeModel.findByIdAndRemove(getId,(error,data)=>{
+        if(error)
+        {
+            res.send({"status":"error"})
+        }
+        else
+        {
+            res.send({"status":"success"})
+        }
+    })
+})
+
     app.listen(4008,(req,res)=>{
         console.log("server running")
     })
